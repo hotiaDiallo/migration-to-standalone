@@ -15,7 +15,7 @@ import { Component, OnInit } from '@angular/core';
       .app {
         background: #fff;
         border-radious: 8px;
-        max-width: 400px;
+        max-width: 400px; 
         with: 94%;
         margin: 25px auto;
         padding: 25px;
