@@ -5,9 +5,14 @@ import { Donut } from '../../models/donut.model';
   selector: 'donut-list',
   template: `
     <div>
-      <donut-card [donut]="donuts[0]"></donut-card>
-      <donut-card [donut]="donuts[1]"></donut-card>
-      <donut-card [donut]="donuts[2]"></donut-card>
+      <ng-container *ngIf="donuts.length; else nothing">
+        <donut-card 
+          *ngFor="let donut of donuts; trackBy: trackById" 
+          [donut]="donut"></donut-card>
+      </ng-container>
+      <ng-template #nothing>
+        <p>No donuts here...</p>
+      </ng-template>
     </div>
   `,
   styles: [
@@ -23,7 +28,8 @@ export class DonutListComponent implements OnInit {
         name: 'Just Chocolate',
         icon: 'just-chocolate',
         price: 119,
-        description: 'For pure chocolate'
+        description: 'For pure chocolate',
+        promo: 'limited'
       },
       {
         id: '2u98Kl',
@@ -31,7 +37,7 @@ export class DonutListComponent implements OnInit {
         icon: 'glazed-fudge',
         price: 129,
         description: 'Sticky perfection',
-        promo: true
+        promo: 'new'
       },
       {
         id: '3u98Kl',
@@ -41,6 +47,10 @@ export class DonutListComponent implements OnInit {
         description: 'Chcolate drizzled with caramel'
       }
     ];
+  }
+
+  trackById(index: number, value: Donut) {
+    return value.id;
   }
 
 }

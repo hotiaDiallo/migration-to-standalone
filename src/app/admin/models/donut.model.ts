@@ -4,5 +4,5 @@ export interface Donut {
     price: number;
     icon: string;
     description: string;
-    promo?: boolean;
+    promo?: 'new' | 'limited';
 }
