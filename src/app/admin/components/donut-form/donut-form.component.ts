@@ -5,7 +5,7 @@ import { Donut } from '../../models/donut.model';
 @Component({
   selector: 'donut-form',
   template: `
-    <form class="donut-form" (ngSubmit)="handleSubmit(form)" #form="ngForm">
+    <form class="donut-form" #form="ngForm">
       <label>
         <span>Name</span>
         <input
@@ -97,11 +97,11 @@ import { Donut } from '../../models/donut.model';
         </ng-container>
       </label>
 
-      <button type="submit" class="btn btn--green">Create</button>
+      <button type="button" (click)="handleCreate(form)" class="btn btn--green">Create</button>
+      <button type="button" (click)="handleUpdate(form)" [disabled]="form.untouched" class="btn btn--green">Update</button>
+      <button type="button" (click)="handleDelete()" class="btn btn--red">Delete</button>
       <button type="button" class="btn btn--grey" (click)="form.resetForm()">Reset</button>
       <div *ngIf="form.valid && form.submitted" class="donut-form-working">Working...</div>
-      <pre>{{ form.value | json }}</pre>
-      <pre>{{ donut | json }}</pre>
     </form>
   `,
   styles: [
@@ -139,6 +139,8 @@ export class DonutFormComponent {
 
   @Input() donut!: Donut;
   @Output() create = new EventEmitter<Donut>();
+  @Output() update = new EventEmitter<Donut>();
+  @Output() delete = new EventEmitter<Donut>();
 
   icons: string[] = [
     'caramel-swirl',
@@ -150,11 +152,25 @@ export class DonutFormComponent {
     'zesty-lemon',
   ];
 
-  handleSubmit(form: NgForm) {
+  handleCreate(form: NgForm) {
     if (form.valid) {
       this.create.emit(form.value)
     } else {
       form.form.markAllAsTouched();
+    }
+  }
+
+  handleUpdate(form: NgForm) {
+    if (form.valid) {
+      this.update.emit({ id: this.donut.id, ...form.value })
+    } else {
+      form.form.markAllAsTouched();
+    }
+  }
+
+  handleDelete() {
+    if (confirm(`Really delete ${this.donut.name}?`)) {
+      this.delete.emit({ ...this.donut })
     }
   }
 

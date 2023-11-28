@@ -29,6 +29,7 @@ import { DonutFormComponent } from './components/donut-form/donut-form.component
     CommonModule,
     FormsModule
   ],
+  providers: [],
   exports: [
     DonutListComponent,
     DonutSingleComponent

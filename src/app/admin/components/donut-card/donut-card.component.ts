@@ -15,11 +15,10 @@ import { Donut } from '../../models/donut.model';
             {{donut.name}}
             <ng-container [ngSwitch]="donut.promo">
               <span class="donut-card-label">
-                <ng-template [ngSwitchCase]="'new'"]>NEW</ng-template>
-                <ng-template [ngSwitchCase]="'limited'"]>LIMITED</ng-template>
-                <!-- <ng-template ngSwitchDefault>NOTHING</ng-template> -->
+                <ng-template [ngSwitchCase]="'new'">NEW</ng-template>
+                <ng-template [ngSwitchCase]="'limited'">LIMITED</ng-template>
+                <ng-template ngSwitchDefault>NOTHING</ng-template>
               </span>
-              <span *ngSwitchCase="'limited'" class="donut-card-label">LIMITED</span>
             </ng-container>
           </p>
           <p class="donut-card-price">{{donut.price / 100 | currency: 'USD'}} </p>
