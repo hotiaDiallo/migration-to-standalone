@@ -18,14 +18,14 @@ import { DonutFormComponent } from './components/donut-form/donut-form.component
 
 // directives
 
-export const routes: Routes = [
+export const AdminRoutes: Routes = [
   { path: 'donuts', component: DonutListComponent },
   { path: 'donuts/new', component: DonutSingleComponent, data: { isEdit: false } },
   { path: 'donuts/:id', component: DonutSingleComponent, data: { isEdit: true } },
   { path: '', pathMatch: 'full', redirectTo: 'donuts' }
 ]
 
-@NgModule({
+/* @NgModule({
   declarations: [
     DonutListComponent,
     DonutCardComponent,
@@ -38,10 +38,5 @@ export const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   providers: [],
-  // Export no more needed, routing takes off
-  /* exports: [
-    DonutListComponent,
-    DonutSingleComponent
-  ] */
 })
-export class AdminModule { }
+export class AdminModule { } */
