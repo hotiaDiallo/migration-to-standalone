@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router'
 
 // containers
 import { DonutListComponent } from './containers/donut-list/donut-list.component';
@@ -18,6 +18,11 @@ import { DonutFormComponent } from './components/donut-form/donut-form.component
 
 // directives
 
+export const routes: Routes = [
+  { path: 'donuts', component: DonutListComponent },
+  { path: 'donut', component: DonutSingleComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'donuts' }
+]
 
 @NgModule({
   declarations: [
@@ -29,12 +34,13 @@ import { DonutFormComponent } from './components/donut-form/donut-form.component
   imports: [
     CommonModule,
     FormsModule,
-    HttpClientModule
+    RouterModule.forChild(routes)
   ],
   providers: [],
-  exports: [
+  // Export no more needed, routing takes off
+  /* exports: [
     DonutListComponent,
     DonutSingleComponent
-  ]
+  ] */
 })
 export class AdminModule { }
